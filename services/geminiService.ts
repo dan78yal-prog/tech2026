@@ -1,5 +1,4 @@
 
-// Fixed: Added Type import and implemented responseSchema to ensure the AI output follows a strict JSON structure as recommended
 import { GoogleGenAI, Type } from "@google/genai";
 import { Student } from "../types";
 
@@ -41,14 +40,14 @@ export const getStudentSummary = async (student: Student) => {
             },
           },
           required: ["status", "summary", "advice"],
-          propertyOrdering: ["status", "summary", "advice"],
         },
       }
     });
 
-    // Accessing .text as a property is the correct way per @google/genai rules
     const text = response.text || "{}";
-    return JSON.parse(text.trim());
+    // تنظيف النص من أي علامات متبقية للماركدوان لضمان عمل JSON.parse
+    const cleanText = text.replace(/```json/g, "").replace(/```/g, "").trim();
+    return JSON.parse(cleanText);
   } catch (error) {
     console.error("Gemini Error:", error);
     return {

@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 import Dashboard from './views/Dashboard';
 import ClassDetail from './views/ClassDetail';
 import Analytics from './views/Analytics';
+import Settings from './views/Settings';
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const App: React.FC = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/class/:id" element={<ClassDetail />} />
           <Route path="/analytics" element={<Analytics />} />
-          <Route path="/settings" element={<div className="p-8 text-center text-gray-500">الإعدادات قريباً...</div>} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Layout>
     </HashRouter>
